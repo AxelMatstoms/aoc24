@@ -19,7 +19,7 @@ def run(reg, prog):
                 reg[1] ^= prog[pc + 1]
                 pc += 2
             case 2:  # bst
-                reg[1] = combo(prog[pc + 1]) % 8
+                reg[1] = combo(prog[pc + 1]) & 0x7
                 pc += 2
             case 3:  # jnz
                 if reg[0]:
@@ -30,7 +30,7 @@ def run(reg, prog):
                 reg[1] ^= reg[2]
                 pc += 2
             case 5:  # out
-                out.append(combo(prog[pc + 1]) % 8)
+                out.append(combo(prog[pc + 1]) & 0x7)
                 pc += 2
             case 6:  # bdv
                 reg[1] = reg[0] >> combo(prog[pc + 1])
@@ -67,7 +67,7 @@ def solve_p2(path):
         p = tuple(int(x) for x in p.split(": ")[1].split(","))
 
     candidates = [0]
-    for i in range(len(p) - 1, -1, -1):
+    for i in reversed(range(len(p))):
         place = 8 ** i
         new_candidates = []
         for prefix in candidates:
