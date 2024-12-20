@@ -102,7 +102,6 @@ def solve_p2(path):
                     if delta_cost >= 100:
                         res += 1
 
-
     return res
 
 
