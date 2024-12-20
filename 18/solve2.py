@@ -2,6 +2,7 @@
 structure to speed up checking connectivity."""
 
 from collections import deque
+import time
 
 
 def solve_p1(path, size=70, n=1024):
@@ -118,7 +119,16 @@ def main():
     print(solve_p1("input"))
 
     assert solve_p2("example", size=6) == "6,1"
+
+    t0 = time.time()
     print(solve_p2("input"))
+    elapsed = time.time() - t0
+    print(f"Elapsed (input): {elapsed:.4f}s")
+
+    t0 = time.time()
+    print(solve_p2("hard", size=213))
+    elapsed = time.time() - t0
+    print(f"Elapsed (hard): {elapsed:.4f}s")
 
 
 if __name__ == "__main__":
