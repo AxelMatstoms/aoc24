@@ -30,7 +30,7 @@ def solve_p2(path):
     scores = collections.Counter()
     for init in nums:
         secret = init
-        suffix = []
+        suffix = tuple()
         last = init % 10
         buyer_score = collections.Counter()
 
@@ -48,15 +48,14 @@ def solve_p2(path):
             delta = digit - last
             last = digit
 
-            suffix.append(delta)
+            suffix = (*suffix, delta)
             if len(suffix) > 4:
-                suffix.pop(0)
+                suffix = suffix[1:]
             else:
                 continue
 
-            key = tuple(suffix)
-            if key not in buyer_score:
-                buyer_score[key] = digit
+            if suffix not in buyer_score:
+                buyer_score[suffix] = digit
 
         scores += buyer_score
 
